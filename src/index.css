@@ -1,13 +1,25 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/*
+    @font-face is a CSS at-rule used to define custom fonts that are downloaded from a server and used on a webpage 
+    It allows you to specify the font files and their characteristics so that you can use the font in your CSS styles.
+*/
+@font-face {
+    font-family: "Revamped";
+    src: url("./fonts/Revamped.otf");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+    font-family: "Capture";
+    src: url("./fonts/Capture.ttf");
+}
+
+* {
+    font-family: monospace;
+}
+
+html,
+body,
+#root,
+main {
+    height: 100%;
+    background-color: #020309;
 }
