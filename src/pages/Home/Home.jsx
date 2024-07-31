@@ -92,6 +92,13 @@ const Home = () => {
 		<section className="main-section-container">
 			<div className="content">
 				{
+					loading && (
+						<div className="loading-container">
+							LOADING
+						</div>
+					)
+				}
+				{
 					!loading && (
 						<>
 							<StarsConvas loading={loading} />

@@ -166,14 +166,6 @@ const Astronaut = ({ currentMove = ASTRONAUT_MOVES.INITIAL_MOVE.key, onLoad }) =
         }
     }, [actions, ASTRONAUT_MOVES[currentMove].model_animation]);
 
-    // useEffect(() => {
-    //     if (actions && actions[ASTRONAUT_MOVES[currentMove].model_animation]) {
-    //         console.log(ASTRONAUT_MOVES[currentMove].model_animation);
-    //         actions[ASTRONAUT_MOVES[currentMove].model_animation].play();
-    //         actions[ASTRONAUT_MOVES[currentMove].model_animation].play();
-    //     }
-    // }, [ASTRONAUT_MOVES[currentMove].model_animation]);
-
     // Use spring for animation
     const { position, scale, rotation } = useSpring({
         position: currentPosition,
