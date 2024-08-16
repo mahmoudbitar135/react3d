@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useAnimations, useGLTF, useProgress } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
-import { apply_new_rotation } from '../utils/common';
+import { apply_new_position, apply_new_rotation, isMobile } from '../utils/common';
 import { NO_CHANGE } from './constants/constants';
 
 const ANIMATION_NAMES = {
@@ -16,6 +16,8 @@ const ANIMATION_NAMES = {
     silly: 'silly',
 };
 
+const isMobileDecive = isMobile();
+
 export const ASTRONAUT_MOVES = {
     INITIAL_MOVE: {
         key: 'INITIAL_MOVE',
@@ -28,7 +30,7 @@ export const ASTRONAUT_MOVES = {
     },
     FIRST_MOVE: {
         key: 'FIRST_MOVE',
-        position: [6, -1, 185],
+        position: isMobileDecive ? [1, -1, 185] : [6, -1, 185],
         rotation: [0, -0.5, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0.0,
@@ -37,7 +39,7 @@ export const ASTRONAUT_MOVES = {
     },
     SECOND_MOVE: {
         key: 'SECOND_MOVE',
-        position: [-5, 1, 185],
+        position: isMobileDecive ? [-1, -3, 185] : [-5, 1, 185],
         rotation: [0, 1, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0.006,
@@ -46,7 +48,7 @@ export const ASTRONAUT_MOVES = {
     },
     THIRD_MOVE: {
         key: 'THIRD_MOVE',
-        position: [4, 1, 185],
+        position: isMobileDecive ? [NO_CHANGE, NO_CHANGE, NO_CHANGE] : [4, 1, 185],
         rotation: [0, -0.5, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0.006,
@@ -55,7 +57,7 @@ export const ASTRONAUT_MOVES = {
     },
     FORTH_MOVE: {
         key: 'FORTH_MOVE',
-        position: [-5, 0, 185],
+        position: isMobileDecive ? [NO_CHANGE, NO_CHANGE, NO_CHANGE] : [-5, 0, 185],
         rotation: [0, 1, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0.006,
@@ -64,7 +66,7 @@ export const ASTRONAUT_MOVES = {
     },
     FIFTH_MOVE: {
         key: 'FIFTH_MOVE',
-        position: [6, 1, 185],
+        position: isMobileDecive ? [NO_CHANGE, NO_CHANGE, NO_CHANGE] : [6, 1, 185],
         rotation: [0, -0.5, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0.006,
@@ -73,7 +75,7 @@ export const ASTRONAUT_MOVES = {
     },
     SEXTH_MOVE: {
         key: 'SEXTH_MOVE',
-        position: [6, -3, 186],
+        position: isMobileDecive ? [1, -3, 186] : [6, -3, 186],
         rotation: [0, 0, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0,
@@ -82,7 +84,7 @@ export const ASTRONAUT_MOVES = {
     },
     SEVENTH_MOVE: {
         key: 'SEVENTH_MOVE',
-        position: [0, -2, 191],
+        position: isMobileDecive ? [0, -2, 191] : [0, -2, 191],
         rotation: [0, 0, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0,
@@ -91,7 +93,7 @@ export const ASTRONAUT_MOVES = {
     },
     EIGHTH_MOVE: {
         key: 'EIGHTH_MOVE',
-        position: [0, -2, 191],
+        position: isMobileDecive ? [NO_CHANGE, NO_CHANGE, NO_CHANGE] : [0, -2, 191],
         rotation: [0, 0, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0,
@@ -100,7 +102,7 @@ export const ASTRONAUT_MOVES = {
     },
     NINETH_MOVE: {
         key: 'NINETH_MOVE',
-        position: [0, -2, 191],
+        position: isMobileDecive ? [NO_CHANGE, NO_CHANGE, NO_CHANGE] : [0, -2, 191],
         rotation: [0, 0, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0,
@@ -109,7 +111,7 @@ export const ASTRONAUT_MOVES = {
     },
     TENTH: {
         key: 'TENTH',
-        position: [0, -2, 191],
+        position: isMobileDecive ? [NO_CHANGE, NO_CHANGE, NO_CHANGE] : [0, -2, 191],
         rotation: [0, 0, 0],
         scale: [1, 1, 1],
         xRotationSpeed: 0,
@@ -120,8 +122,7 @@ export const ASTRONAUT_MOVES = {
 
 const Astronaut = ({ currentMove = ASTRONAUT_MOVES.INITIAL_MOVE.key, onLoad }) => {
     const { scene, animations } = useGLTF('/models/astronaut.glb');
-    const { actions, mixer } = useAnimations(animations, scene);
-    const nightLight = true;
+    const { actions } = useAnimations(animations, scene);
     const modelRef = useRef();
     const lightRef = useRef();
 
@@ -138,7 +139,7 @@ const Astronaut = ({ currentMove = ASTRONAUT_MOVES.INITIAL_MOVE.key, onLoad }) =
 
     useEffect(() => {
         setXDirection(1);
-        setCurrentPosition(ASTRONAUT_MOVES[currentMove].position);
+        setCurrentPosition(apply_new_position(ASTRONAUT_MOVES[currentMove].position, currentPosition));
         setCurrentRotation(apply_new_rotation(ASTRONAUT_MOVES[currentMove].rotation, currentRotation));
     }, [currentMove]);
 
@@ -174,7 +175,7 @@ const Astronaut = ({ currentMove = ASTRONAUT_MOVES.INITIAL_MOVE.key, onLoad }) =
         config: { tension: 90, friction: 40 }
     });
 
-    const screenBounds = { left: -10, right: 10 };
+    const screenBounds = isMobileDecive ? { left: -4, right: 4 } : { left: -10, right: 10 };
 
     useFrame(() => {
         if (modelRef.current) {

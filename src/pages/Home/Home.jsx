@@ -7,10 +7,10 @@ import './home.css';
 import Earth, { EARTH_MOVES } from '../../components/Earth';
 import StarsConvas from '../../components/Stars';
 import Moon from '../../components/Moon';
-import Astronaut, { ASTRONAUT_MOVES } from '../../components/Astronaut';
+import Astronaut from '../../components/Astronaut';
 import Question from '../../components/Question';
 import { getRandomQuestions } from '../../utils';
-import { CONTENT_CONFIG } from '../../components/constants/content';
+import { getContentConfig } from '../../components/constants/content';
 import { NUMBER_OF_QUESTIONS } from '../../components/constants/constants';
 import { getScoreTitle } from '../../utils/common';
 import Content from '../../components/Content';
@@ -54,9 +54,11 @@ const Home = () => {
 			},
 		];
 
+		const contentConfig = getContentConfig();
+
 		setContentStepsData(contentSteps.map((content, index) => ({
 			...content,
-			...CONTENT_CONFIG[index],
+			...contentConfig[index],
 		})))
 	}, []);
 

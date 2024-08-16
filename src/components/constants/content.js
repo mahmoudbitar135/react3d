@@ -1,6 +1,7 @@
 import { MOON_MOVES } from "../Moon";
 import { EARTH_MOVES } from '../Earth';
 import { ASTRONAUT_MOVES } from "../Astronaut";
+import { isMobile } from "../../utils/common";
 
 export const QUESTIONS_BANK = [
     {
@@ -101,124 +102,128 @@ export const QUESTIONS_BANK = [
     },
 ];
 
-export const CONTENT_CONFIG = [
-    {
-        id: 0,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.INITIAL_MOVE.key,
-        earth_movement: EARTH_MOVES.INITIAL_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.INITIAL_MOVE.key,
-    },
-    {// Question 1
-        id: 1,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.FIRST_MOVE.key,
-        earth_movement: EARTH_MOVES.FIRST_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.FIRST_MOVE.key,
-    },
-    {
-        id: 2,
-        alignment: 'left',
-        moon_movement: MOON_MOVES.SECOND_MOVE.key,
-        earth_movement: EARTH_MOVES.SECOND_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.SECOND_MOVE.key,
-    },
-    {
-        id: 3,
-        alignment: 'right',
-        moon_movement: MOON_MOVES.THIRD_MOVE.key,
-        earth_movement: EARTH_MOVES.THIRD_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.THIRD_MOVE.key,
-    },
-    {
-        id: 4,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.FORTH_MOVE.key,
-        earth_movement: EARTH_MOVES.FORTH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.THIRD_MOVE.key,
-    },
-    {
-        id: 5,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.FORTH_MOVE.key,
-        earth_movement: EARTH_MOVES.FORTH_NEXT_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.FORTH_MOVE.key,
-    },
-    {
-        id: 6,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.FIFTH_MOVE.key,
-        earth_movement: EARTH_MOVES.FIFTH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.FORTH_MOVE.key,
-    },
-    {
-        id: 7,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.FIFTH_MOVE.key,
-        earth_movement: EARTH_MOVES.FIFTH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.FIFTH_MOVE.key,
-    },
-    {
-        id: 8,
-        alignment: 'left',
-        moon_movement: MOON_MOVES.FIFTH_MOVE.key,
-        earth_movement: EARTH_MOVES.SEXTH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.FIFTH_MOVE.key,
-    },
-    {
-        id: 9,
-        alignment: 'left',
-        moon_movement: MOON_MOVES.FIFTH_MOVE.key,
-        earth_movement: EARTH_MOVES.SEVENTH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.FIFTH_MOVE.key,
-    },
-    {
-        id: 10,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.FIFTH_MOVE.key,
-        earth_movement: EARTH_MOVES.EIGHTH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.FIFTH_MOVE.key,
-    },
-    {
-        id: 11,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.SEXTH_MOVE.key,
-        earth_movement: EARTH_MOVES.NINETH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.SEXTH_MOVE.key,
-    },
-    {
-        id: 12,
-        alignment: 'right',
-        moon_movement: MOON_MOVES.SEXTH_MOVE.key,
-        earth_movement: EARTH_MOVES.NINETH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.SEXTH_MOVE.key,
-    },
-    {
-        id: 13,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.SEVENTH_MOVE.key,
-        earth_movement: EARTH_MOVES.NINETH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.SEVENTH_MOVE.key,
-    },
-    {
-        id: 14,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.SEVENTH_MOVE.key,
-        earth_movement: EARTH_MOVES.NINETH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.EIGHTH_MOVE.key,
-    },
-    {
-        id: 15,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.SEVENTH_MOVE.key,
-        earth_movement: EARTH_MOVES.NINETH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.NINETH_MOVE.key,
-    },
-    {
-        id: 16,
-        alignment: 'center',
-        moon_movement: MOON_MOVES.SEVENTH_MOVE.key,
-        earth_movement: EARTH_MOVES.NINETH_MOVE.key,
-        astronaut_movement: ASTRONAUT_MOVES.TENTH.key,
-    },
-];
+export const getContentConfig = () => {
+    const alignment = isMobile() ? 'center' : undefined;
+
+    return [
+        {
+            id: 0,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.INITIAL_MOVE.key,
+            earth_movement: EARTH_MOVES.INITIAL_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.INITIAL_MOVE.key,
+        },
+        {// Question 1
+            id: 1,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.FIRST_MOVE.key,
+            earth_movement: EARTH_MOVES.FIRST_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.FIRST_MOVE.key,
+        },
+        {
+            id: 2,
+            alignment: alignment || 'left',
+            moon_movement: MOON_MOVES.SECOND_MOVE.key,
+            earth_movement: EARTH_MOVES.SECOND_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.SECOND_MOVE.key,
+        },
+        {
+            id: 3,
+            alignment: alignment || 'right',
+            moon_movement: MOON_MOVES.THIRD_MOVE.key,
+            earth_movement: EARTH_MOVES.THIRD_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.THIRD_MOVE.key,
+        },
+        {
+            id: 4,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.FORTH_MOVE.key,
+            earth_movement: EARTH_MOVES.FORTH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.THIRD_MOVE.key,
+        },
+        {
+            id: 5,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.FORTH_MOVE.key,
+            earth_movement: EARTH_MOVES.FORTH_NEXT_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.FORTH_MOVE.key,
+        },
+        {
+            id: 6,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.FIFTH_MOVE.key,
+            earth_movement: EARTH_MOVES.FIFTH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.FORTH_MOVE.key,
+        },
+        {
+            id: 7,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.FIFTH_MOVE.key,
+            earth_movement: EARTH_MOVES.FIFTH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.FIFTH_MOVE.key,
+        },
+        {
+            id: 8,
+            alignment: alignment || 'left',
+            moon_movement: MOON_MOVES.FIFTH_MOVE.key,
+            earth_movement: EARTH_MOVES.SEXTH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.FIFTH_MOVE.key,
+        },
+        {
+            id: 9,
+            alignment: alignment || 'left',
+            moon_movement: MOON_MOVES.FIFTH_MOVE.key,
+            earth_movement: EARTH_MOVES.SEVENTH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.FIFTH_MOVE.key,
+        },
+        {
+            id: 10,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.FIFTH_MOVE.key,
+            earth_movement: EARTH_MOVES.EIGHTH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.FIFTH_MOVE.key,
+        },
+        {
+            id: 11,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.SEXTH_MOVE.key,
+            earth_movement: EARTH_MOVES.NINETH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.SEXTH_MOVE.key,
+        },
+        {
+            id: 12,
+            alignment: alignment || 'right',
+            moon_movement: MOON_MOVES.SEXTH_MOVE.key,
+            earth_movement: EARTH_MOVES.NINETH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.SEXTH_MOVE.key,
+        },
+        {
+            id: 13,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.SEVENTH_MOVE.key,
+            earth_movement: EARTH_MOVES.NINETH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.SEVENTH_MOVE.key,
+        },
+        {
+            id: 14,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.SEVENTH_MOVE.key,
+            earth_movement: EARTH_MOVES.NINETH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.EIGHTH_MOVE.key,
+        },
+        {
+            id: 15,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.SEVENTH_MOVE.key,
+            earth_movement: EARTH_MOVES.NINETH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.NINETH_MOVE.key,
+        },
+        {
+            id: 16,
+            alignment: alignment || 'center',
+            moon_movement: MOON_MOVES.SEVENTH_MOVE.key,
+            earth_movement: EARTH_MOVES.NINETH_MOVE.key,
+            astronaut_movement: ASTRONAUT_MOVES.TENTH.key,
+        },
+    ];
+}

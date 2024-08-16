@@ -43,3 +43,8 @@ export const getScoreTitle = (score) => {
             return `Good effort!`;
     }
 }
+
+
+export const isMobile = () => {
+    return window.innerWidth <= 767;
+}
